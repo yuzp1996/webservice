@@ -1,10 +1,13 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"time"
+	"webservice/Http/server/businesslogic"
 	"webservice/Http/server/customhandler"
+	"webservice/Http/server/cmd"
 )
 
 func main(){
@@ -45,7 +48,12 @@ func main(){
 
 
 
-	http.ListenAndServe(":3000", mux)
+	//http.ListenAndServe(":3000", mux)
+
+	businesslogic.NewCommendOptions().Hello()
+
+
+	cmd.Execute()
 
 
 }
@@ -62,5 +70,4 @@ func timeHandlerwithPara(format string)http.Handler{
 	}
 	return http.HandlerFunc(fn)
 }
-
 

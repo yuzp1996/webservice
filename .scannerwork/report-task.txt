@@ -1,6 +1,0 @@
-projectKey=webservice
-serverUrl=http://127.0.0.1:32016
-serverVersion=7.9.1.27448
-dashboardUrl=http://127.0.0.1:32016/dashboard?id=webservice
-ceTaskId=AWyUQCURrgEqGzSBtyeH
-ceTaskUrl=http://127.0.0.1:32016/api/ce/task?id=AWyUQCURrgEqGzSBtyeH

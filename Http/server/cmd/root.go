@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/spf13/cobra"
 	"os"
+	"webservice/Http/server/customhandler"
 )
 
 var rootCmd = &cobra.Command{
@@ -15,10 +16,7 @@ var rootCmd = &cobra.Command{
 }
 
 func Execute(){
-
-
-
-
+	customhandler.StartServer()
 	if err := rootCmd.Execute(); err != nil{
 		fmt.Println(err)
 		os.Exit(1)

@@ -9,8 +9,8 @@ type Hellointer interface {
 func NewCommendOptions()Hellointer{
 	return CommendOption{
 		Options:[]Hellointer{
-			optoner1{"zpyu"},
-			optoner2{"yahui"},
+			optoner1{"logoption"},
+			optoner2{"pamaration"},
 		}}
 }
 

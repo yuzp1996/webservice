@@ -1,12 +1,15 @@
 package customhandler
 
 import (
+	"fmt"
+	"github.com/spf13/viper"
 	"k8s.io/klog"
 	"net/http"
 	"time"
 	"webservice/Http/server/businesslogic"
 
 )
+
 
 func StartServer(){
 	mux := http.NewServeMux()
@@ -41,10 +44,13 @@ func StartServer(){
 	// make some init function
 	businesslogic.NewCommendOptions().Hello()
 
-	klog.V(1).Infoln("listening")
 
 
-	http.ListenAndServe(":3000", mux)
+	name := viper.Get("name")
+	port := viper.GetString("port")
+	klog.Errorf("name is %v",name)
+	klog.Errorf("listening port %v", port)
+	http.ListenAndServe(fmt.Sprintf(":%s",port), mux)
 
 }
 

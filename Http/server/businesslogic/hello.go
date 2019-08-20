@@ -9,7 +9,7 @@ type Hellointer interface {
 func NewCommendOptions()Hellointer{
 	return CommendOption{
 		Options:[]Hellointer{
-			optoner1{"logoption"},
+			port{"logoption"},
 			optoner2{"pamaration"},
 		}}
 }
@@ -24,10 +24,10 @@ func(co CommendOption)Hello(){
 	}
 }
 
-type optoner1 struct {
+type port struct {
 	name string
 }
-func (O1 optoner1)Hello(){
+func (O1 port)Hello(){
 	fmt.Println(O1.name)
 }
 

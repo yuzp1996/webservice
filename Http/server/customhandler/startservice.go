@@ -52,6 +52,9 @@ func StartServer(){
 	// post way
 	mux.HandleFunc("/login",Login)
 
+	//get pods
+	mux.HandleFunc("/pods",Getpods)
+
 
 	http.ListenAndServe(fmt.Sprintf(":%s",port), mux)
 

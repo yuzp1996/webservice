@@ -2,18 +2,29 @@ package customhandler
 
 import (
 	"fmt"
+	"github.com/fatih/color"
 	"github.com/spf13/viper"
-	"k8s.io/klog"
 	"net/http"
 	"time"
 	"webservice/Http/server/businesslogic"
-
 )
 
 
 func StartServer(){
-	mux := http.NewServeMux()
 
+	// make some init function
+
+	name := viper.Get("name")
+	port := viper.GetString("port")
+
+	color.Cyan("name is %v",name)
+	color.Blue("listening port %v", port)
+
+	businesslogic.NewCommendOptions().Hello()
+
+
+
+	mux := http.NewServeMux()
 	// first way
 	redirehandler := http.RedirectHandler("http://www.baidu.com",307)
 	mux.Handle("/foo", redirehandler)
@@ -34,22 +45,14 @@ func StartServer(){
 	mux.HandleFunc("/shorttime",timeHandler)
 
 
-	//var func you can input parama
+	//var func you can input parama just like third way
 	mux.Handle("/paratime", timeHandlerwithPara(time.RFC3339))
 
 
 	// post way
 	mux.HandleFunc("/login",Login)
 
-	// make some init function
-	businesslogic.NewCommendOptions().Hello()
 
-
-
-	name := viper.Get("name")
-	port := viper.GetString("port")
-	klog.Errorf("name is %v",name)
-	klog.Errorf("listening port %v", port)
 	http.ListenAndServe(fmt.Sprintf(":%s",port), mux)
 
 }

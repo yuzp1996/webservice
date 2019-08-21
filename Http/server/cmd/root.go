@@ -19,7 +19,7 @@ var rootCmd = &cobra.Command{
 func Execute(){
 
 	rootCmd.Flags().String("name","yuzhipeng","the name of author")
-	rootCmd.Flags().String("port",":3000","the name of author")
+	rootCmd.Flags().String("port","3000","the name of author")
 
 	_ = viper.BindPFlag("name", rootCmd.Flags().Lookup("name"))
 	_ = viper.BindPFlag("port", rootCmd.Flags().Lookup("port"))

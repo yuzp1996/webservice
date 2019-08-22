@@ -1,8 +1,8 @@
 sonar:
 	sonar-scanner
 
-
-all: sonar
+#Usage: make all -log="k8s client test"
+all:
 	git add .
-	git commit -m "push to master"
+	git commit -m "$(log)"
 	git push origin master

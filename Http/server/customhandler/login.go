@@ -3,15 +3,8 @@ package customhandler
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
-	"k8s.io/client-go/kubernetes"
-	"k8s.io/client-go/rest"
-	"k8s.io/client-go/tools/clientcmd"
 	"k8s.io/klog"
 	"net/http"
-
-	meta_v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	core_v1 "k8s.io/api/core/v1"
 )
 
 type BaseJsonBean struct {

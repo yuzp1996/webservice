@@ -41,6 +41,7 @@ type Dog struct {
 func(dog Dog)say(object animal){
 	// I want to konw if the object is dog
 	shouldadog := object.(Dog)
+
 	log.Printf("wangwang... your name is %v", shouldadog.name())
 }
 func (dog Dog)name()string  {

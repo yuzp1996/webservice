@@ -8,7 +8,7 @@ import (
 	"os"
 )
 
-// New logger you define you change the logger preix and flag
+// New logger you can define and  change the logger preix and flag
 //
 // it is same as you use log  and set the log.SetPrefix and log.SetFlags
 var Error *log.Logger

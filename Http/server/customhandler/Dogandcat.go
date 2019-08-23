@@ -25,6 +25,7 @@ func DogandCat(w http.ResponseWriter, req *http.Request){
 
 	newCat.say(newDog)
 	newDog.say(newCat)
+
 }
 
 

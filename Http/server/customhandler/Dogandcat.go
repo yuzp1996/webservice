@@ -22,6 +22,19 @@ func DogandCat(w http.ResponseWriter, req *http.Request){
 
 	newCat.GetChild()
 
+	childCat1 := Cat{
+		Name:"childCat1mimi",
+	}
+	childCat2 := Cat{
+		Name:"childCat2miomio",
+	}
+	childernCat := []Cat{
+		childCat1,
+		childCat2,
+	}
+
+	newCat.GetChild(childernCat...)
+
 	newCat.say(newCat)
 	newDog.say(newDog)
 
@@ -69,7 +82,7 @@ func (cat Cat)name()string  {
 func(cat Cat)GetChild(cats ...Cat){
 	var childname string
 	for _, catname := range cats{
-		childname += catname.Name
+		childname += catname.Name+" "
 	}
 	log.Printf("cat has child cat and name is %v\n",childname)
 

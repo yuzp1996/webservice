@@ -20,6 +20,8 @@ func DogandCat(w http.ResponseWriter, req *http.Request){
 		Name:"CAT",
 	}
 
+	newCat.GetChild()
+
 	newCat.say(newCat)
 	newDog.say(newDog)
 
@@ -49,6 +51,9 @@ func (dog Dog)name()string  {
 	return dog.Name
 }
 
+
+
+
 type Cat struct {
 	Name string
 }
@@ -56,10 +61,19 @@ func(cat Cat)say(object animal){
 	shouldacat := object.(Cat)
 	log.Printf("miaomiao...  your name is %v",shouldacat.name())
 }
-func (cat Cat )name()string  {
+func (cat Cat)name()string  {
 	return cat.Name
 }
 
+// I can recive null param
+func(cat Cat)GetChild(cats ...Cat){
+	var childname string
+	for _, catname := range cats{
+		childname += catname.Name
+	}
+	log.Printf("cat has child cat and name is %v\n",childname)
+
+}
 
 
 

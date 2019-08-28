@@ -22,8 +22,6 @@ func StartServer(){
 
 	businesslogic.NewCommendOptions().Hello()
 
-
-
 	mux := http.NewServeMux()
 	// first way
 	redirehandler := http.RedirectHandler("http://www.baidu.com",307)

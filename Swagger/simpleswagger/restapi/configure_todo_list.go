@@ -8,14 +8,14 @@ import (
 	"net/http"
 	"sync"
 	"sync/atomic"
-	"webservice/Swagger/models"
+	"webservice/Swagger/simpleswagger/models"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
 
-	"webservice/Swagger/restapi/operations"
-	"webservice/Swagger/restapi/operations/todos"
+	"webservice/Swagger/simpleswagger/restapi/operations"
+	"webservice/Swagger/simpleswagger/restapi/operations/todos"
 )
 
 //go:generate swagger generate server --target ../../Swagger --name TodoList --spec ../swagger.yml

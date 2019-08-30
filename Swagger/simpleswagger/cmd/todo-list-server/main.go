@@ -6,8 +6,8 @@ import (
 	"log"
 	"os"
 
-	"webservice/Swagger/restapi"
-	"webservice/Swagger/restapi/operations"
+	"webservice/Swagger/simpleswagger/restapi"
+	"webservice/Swagger/simpleswagger/restapi/operations"
 
 	loads "github.com/go-openapi/loads"
 	flags "github.com/jessevdk/go-flags"

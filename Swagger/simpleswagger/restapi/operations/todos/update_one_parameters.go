@@ -15,7 +15,7 @@ import (
 
 	strfmt "github.com/go-openapi/strfmt"
 
-	models "webservice/Swagger/models"
+	models "webservice/Swagger/simpleswagger/models"
 )
 
 // NewUpdateOneParams creates a new UpdateOneParams object

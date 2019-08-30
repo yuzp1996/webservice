@@ -10,7 +10,7 @@ import (
 
 	"github.com/go-openapi/runtime"
 
-	models "webservice/Swagger/models"
+	models "webservice/Swagger/simpleswagger/models"
 )
 
 // AddOneCreatedCode is the HTTP code returned for type AddOneCreated

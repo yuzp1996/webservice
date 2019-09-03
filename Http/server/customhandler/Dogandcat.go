@@ -13,6 +13,20 @@ func DogandCat(w http.ResponseWriter, req *http.Request){
 			log.Printf("Panic err happend bug Recovered err:{%v}", r)
 		}
 	}()
+
+	testmap := map[string]bool{
+		"cat":true,
+	}
+
+	if testmap["dog"]{
+		log.Printf("dog is small I cant woo woo ...")
+	}
+	if testmap["cat"]{
+		log.Printf("cat mi mi ...")
+	}
+
+
+
 	newDog := Dog{
 		Name:"DOG",
 	}

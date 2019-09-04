@@ -13,6 +13,11 @@ func DogandCat(w http.ResponseWriter, req *http.Request){
 		}
 	}()
 
+
+	NewDogwithfriend()
+
+
+
 	testmap := map[string]bool{
 		"cat":true,
 	}
@@ -46,6 +51,8 @@ func DogandCat(w http.ResponseWriter, req *http.Request){
 		childCat2,
 	}
 
+
+
 	newCat.GetChild(childernCat...)
 
 	newCat.Say(newCat)
@@ -67,8 +74,36 @@ func (h *Human)Mypetname()string{
 
 
 
+
+
 type Dog struct {
 	Name string
+	Friend []Dog
+	AddFriendFunc []func(name string)Dog
+}
+
+func NewDogwithfriend(){
+	mydog := Dog{
+		Name:"xiaobai",
+	}
+	//实现在外部定义方法  然后内部调用   这里主要是用实验性的用方法作为参数
+	mydog.AddFriendFuncs(Newdogfriend)
+	for _, friendfunc := range mydog.AddFriendFunc{
+		mydog.Friend = append(mydog.Friend,friendfunc("xiaohei"))
+	}
+	log.Printf("I have now friend it's name is %v", mydog.Friend[0].Name)
+
+}
+
+func Newdogfriend(name string)Dog{
+	return Dog{
+		Name:name,
+	}
+}
+
+func (dog *Dog)AddFriendFuncs(GenrateFriend func(name string)Dog)*Dog{
+	dog.AddFriendFunc = append(dog.AddFriendFunc,GenrateFriend)
+	return dog
 }
 
 func(dog Dog)Say(object Animal){

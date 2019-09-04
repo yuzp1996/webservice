@@ -3,9 +3,8 @@ package customhandler
 import (
 	"log"
 	"net/http"
+	. "webservice/Http/server/interface"
 )
-
-
 
 func DogandCat(w http.ResponseWriter, req *http.Request){
 	defer func() {
@@ -49,32 +48,36 @@ func DogandCat(w http.ResponseWriter, req *http.Request){
 
 	newCat.GetChild(childernCat...)
 
-	newCat.say(newCat)
-	newDog.say(newDog)
+	newCat.Say(newCat)
+	newDog.Say(newDog)
 
-	newCat.say(newDog)
-	newDog.say(newCat)
+	newCat.Say(newDog)
+	newDog.Say(newCat)
 
 }
 
 
-type animal interface{
-	say(animal)
-	name() string
+type Human struct {
+	Pet Animal
 }
+
+func (h *Human)Mypetname()string{
+	return h.Pet.Myname()
+}
+
 
 
 type Dog struct {
 	Name string
 }
 
-func(dog Dog)say(object animal){
+func(dog Dog)Say(object Animal){
 	// I want to konw if the object is dog
 	shouldadog := object.(Dog)
 
-	log.Printf("wangwang... your name is %v", shouldadog.name())
+	log.Printf("wangwang... your name is %v", shouldadog.Myname())
 }
-func (dog Dog)name()string  {
+func (dog Dog)Myname()string  {
 	return dog.Name
 }
 
@@ -84,11 +87,11 @@ func (dog Dog)name()string  {
 type Cat struct {
 	Name string
 }
-func(cat Cat)say(object animal){
+func(cat Cat)Say(object Animal){
 	shouldacat := object.(Cat)
-	log.Printf("miaomiao...  your name is %v",shouldacat.name())
+	log.Printf("miaomiao...  your name is %v",shouldacat.Myname())
 }
-func (cat Cat)name()string  {
+func (cat Cat)Myname()string  {
 	return cat.Name
 }
 

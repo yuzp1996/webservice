@@ -15,7 +15,6 @@ func TestPetName(t *testing.T){
 
 	Human := &Human{Pet:mockAnimal}
 
-
 	mockAnimal.EXPECT().Myname().Return("xiaohuanhuan").Times(1)
 	petname := Human.Mypetname()
 	if petname != "xiaohuanhuan"{

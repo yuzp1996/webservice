@@ -13,7 +13,7 @@ func DogandCat(w http.ResponseWriter, req *http.Request){
 		}
 	}()
 
-
+	//在方法中使用func作为参数
 	NewDogwithfriend()
 
 
@@ -63,7 +63,7 @@ func DogandCat(w http.ResponseWriter, req *http.Request){
 
 }
 
-
+// for test interface
 type Human struct {
 	Pet Animal
 }
@@ -79,6 +79,7 @@ func (h *Human)Mypetname()string{
 type Dog struct {
 	Name string
 	Friend []Dog
+	//只需要定义一个方法  你需要实现的方法只要满足我的这个定义就行
 	AddFriendFunc []func(name string)Dog
 }
 
@@ -86,7 +87,7 @@ func NewDogwithfriend(){
 	mydog := Dog{
 		Name:"xiaobai",
 	}
-	//实现在外部定义方法  然后内部调用   这里主要是用实验性的用方法作为参数
+	//实现在外部定义方法  然后内部调用   这里主要是用实验性的用方法作为参数  这里只需要提供参数
 	mydog.AddFriendFuncs(Newdogfriend)
 	for _, friendfunc := range mydog.AddFriendFunc{
 		mydog.Friend = append(mydog.Friend,friendfunc("xiaohei"))
@@ -95,6 +96,7 @@ func NewDogwithfriend(){
 
 }
 
+// 这里只需要提供方法  name这个参数  我们默认是调用方会提供的
 func Newdogfriend(name string)Dog{
 	return Dog{
 		Name:name,

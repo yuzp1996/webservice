@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/fatih/color"
 	"github.com/spf13/viper"
+	"k8s.io/klog"
 	"net/http"
 	"time"
 	"webservice/Http/server/businesslogic"
@@ -16,6 +17,8 @@ func StartServer(){
 
 	name := viper.Get("name")
 	port := viper.GetString("port")
+	basedomain := viper.GetString("basedomain")
+	klog.Errorf("basedomain is %v", basedomain)
 
 	color.Cyan("name is %v",name)
 	color.Blue("listening port %v", port)
@@ -56,6 +59,7 @@ func StartServer(){
 	//get dog and cat
 	mux.HandleFunc("/dogandcat",DogandCat)
 
+	mux.HandleFunc("/fileHandler", fileHandler)
 
 
 	http.ListenAndServe(fmt.Sprintf(":%s",port), mux)

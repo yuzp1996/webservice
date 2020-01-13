@@ -39,6 +39,10 @@ func NewTodoListAPI(spec *loads.Document) *TodoListAPI {
 		BearerAuthenticator: security.BearerAuth,
 		JSONConsumer:        runtime.JSONConsumer(),
 		JSONProducer:        runtime.JSONProducer(),
+		BinProducer:         runtime.ByteStreamProducer(),
+		GetIDHandler: GetIDHandlerFunc(func(params GetIDParams) middleware.Responder {
+			return middleware.NotImplemented("operation GetID has not yet been implemented")
+		}),
 		TodosAddOneHandler: todos.AddOneHandlerFunc(func(params todos.AddOneParams) middleware.Responder {
 			return middleware.NotImplemented("operation TodosAddOne has not yet been implemented")
 		}),
@@ -76,12 +80,16 @@ type TodoListAPI struct {
 	// It has a default implementation in the security package, however you can replace it for your particular usage.
 	BearerAuthenticator func(string, security.ScopedTokenAuthentication) runtime.Authenticator
 
-	// JSONConsumer registers a consumer for a "application/io.goswagger.examples.todo-list.v1+json" mime type
+	// JSONConsumer registers a consumer for a "application/json" mime type
 	JSONConsumer runtime.Consumer
 
-	// JSONProducer registers a producer for a "application/io.goswagger.examples.todo-list.v1+json" mime type
+	// JSONProducer registers a producer for a "application/json" mime type
 	JSONProducer runtime.Producer
+	// BinProducer registers a producer for a "application/octet-stream" mime type
+	BinProducer runtime.Producer
 
+	// GetIDHandler sets the operation handler for the get ID operation
+	GetIDHandler GetIDHandler
 	// TodosAddOneHandler sets the operation handler for the add one operation
 	TodosAddOneHandler todos.AddOneHandler
 	// TodosDestroyOneHandler sets the operation handler for the destroy one operation
@@ -153,6 +161,14 @@ func (o *TodoListAPI) Validate() error {
 		unregistered = append(unregistered, "JSONProducer")
 	}
 
+	if o.BinProducer == nil {
+		unregistered = append(unregistered, "BinProducer")
+	}
+
+	if o.GetIDHandler == nil {
+		unregistered = append(unregistered, "GetIDHandler")
+	}
+
 	if o.TodosAddOneHandler == nil {
 		unregistered = append(unregistered, "todos.AddOneHandler")
 	}
@@ -202,8 +218,8 @@ func (o *TodoListAPI) ConsumersFor(mediaTypes []string) map[string]runtime.Consu
 	for _, mt := range mediaTypes {
 		switch mt {
 
-		case "application/io.goswagger.examples.todo-list.v1+json":
-			result["application/io.goswagger.examples.todo-list.v1+json"] = o.JSONConsumer
+		case "application/json":
+			result["application/json"] = o.JSONConsumer
 
 		}
 
@@ -222,8 +238,11 @@ func (o *TodoListAPI) ProducersFor(mediaTypes []string) map[string]runtime.Produ
 	for _, mt := range mediaTypes {
 		switch mt {
 
-		case "application/io.goswagger.examples.todo-list.v1+json":
-			result["application/io.goswagger.examples.todo-list.v1+json"] = o.JSONProducer
+		case "application/json":
+			result["application/json"] = o.JSONProducer
+
+		case "application/octet-stream":
+			result["application/octet-stream"] = o.BinProducer
 
 		}
 
@@ -266,6 +285,11 @@ func (o *TodoListAPI) initHandlerCache() {
 	if o.handlers == nil {
 		o.handlers = make(map[string]map[string]http.Handler)
 	}
+
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/{id}"] = NewGetID(o.context, o.GetIDHandler)
 
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)

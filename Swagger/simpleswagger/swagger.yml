@@ -5,12 +5,11 @@ info:
   title: A Todo list application
   version: 1.0.0
 consumes:
-  - application/io.goswagger.examples.todo-list.v1+json
+  - application/json
 produces:
-  - application/io.goswagger.examples.todo-list.v1+json
+  - application/json
 schemes:
   - http
-  - https
 paths:
   /:
     get:
@@ -90,6 +89,19 @@ paths:
           description: Deleted
         default:
           description: error
+          schema:
+            $ref: "#/definitions/error"
+    get:
+      summary: Returns a file.
+      produces:
+        - application/octet-stream
+      responses:
+        200:
+          description: get file from jenkins
+          schema:
+            type: file
+        default:
+          description: generic error response
           schema:
             $ref: "#/definitions/error"
 definitions:

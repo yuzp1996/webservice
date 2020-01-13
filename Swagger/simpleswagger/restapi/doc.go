@@ -7,16 +7,16 @@ From the todo list tutorial on goswagger.io
 
     Schemes:
       http
-      https
     Host: localhost
     BasePath: /
     Version: 1.0.0
 
     Consumes:
-    - application/io.goswagger.examples.todo-list.v1+json
+    - application/json
 
     Produces:
-    - application/io.goswagger.examples.todo-list.v1+json
+    - application/json
+    - application/octet-stream
 
 swagger:meta
 */

@@ -19,14 +19,13 @@ var (
 func init() {
 	SwaggerJSON = json.RawMessage([]byte(`{
   "consumes": [
-    "application/io.goswagger.examples.todo-list.v1+json"
+    "application/json"
   ],
   "produces": [
-    "application/io.goswagger.examples.todo-list.v1+json"
+    "application/json"
   ],
   "schemes": [
-    "http",
-    "https"
+    "http"
   ],
   "swagger": "2.0",
   "info": {
@@ -105,6 +104,26 @@ func init() {
       }
     },
     "/{id}": {
+      "get": {
+        "produces": [
+          "application/octet-stream"
+        ],
+        "summary": "Returns a file.",
+        "responses": {
+          "200": {
+            "description": "get file from jenkins",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "generic error response",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      },
       "put": {
         "tags": [
           "todos"
@@ -202,14 +221,13 @@ func init() {
 }`))
 	FlatSwaggerJSON = json.RawMessage([]byte(`{
   "consumes": [
-    "application/io.goswagger.examples.todo-list.v1+json"
+    "application/json"
   ],
   "produces": [
-    "application/io.goswagger.examples.todo-list.v1+json"
+    "application/json"
   ],
   "schemes": [
-    "http",
-    "https"
+    "http"
   ],
   "swagger": "2.0",
   "info": {
@@ -288,6 +306,26 @@ func init() {
       }
     },
     "/{id}": {
+      "get": {
+        "produces": [
+          "application/octet-stream"
+        ],
+        "summary": "Returns a file.",
+        "responses": {
+          "200": {
+            "description": "get file from jenkins",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "generic error response",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      },
       "put": {
         "tags": [
           "todos"

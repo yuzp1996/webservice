@@ -5,7 +5,9 @@ package restapi
 import (
 	"crypto/tls"
 	"github.com/go-openapi/swag"
+	"io"
 	"net/http"
+	"net/url"
 	"sync"
 	"sync/atomic"
 	"webservice/Swagger/simpleswagger/models"
@@ -77,6 +79,42 @@ func allItems(since int64, limit int32) (result []*models.Item) {
 	return
 }
 
+func downloadjenkisnfile(rw http.ResponseWriter){
+
+	// Get the data
+	httpclient:=http.Client{}
+	url := url.URL{
+		Host:"127.0.0.1:8080",
+		//Path:"/job/zpyu/job/zpyutest/3/artifact/zpyu2",
+		Path:"/job/zpyu/job/zpyutest/3/artifact/*zip*/archive.zip",
+
+		Scheme: "http",
+		//http://127.0.0.1:8080/job/zpyu/job/zpyutest/2/artifact/*zip*/archive.zip
+	}
+	request := http.Request{
+		Method: http.MethodGet,
+		URL: &url,
+		Header:  http.Header{"Authorization":[]string{"Basic YWRtaW46MTFlOTg4NGI5MjI5MTRhNjc0Njk1MjY2N2Y3NjI2YWIyZg=="}},
+	}
+
+
+	resp, err :=httpclient.Do(&request)
+
+	if err != nil {
+		panic(err)
+	}
+	defer resp.Body.Close()
+
+	// 这里将data写入了rw中，应该也就是一个reader之类的东西吧
+	_, err = io.Copy(rw,resp.Body)
+
+	if err != nil {
+		panic(err)
+	}
+	return
+
+}
+
 
 func configureAPI(api *operations.TodoListAPI) http.Handler {
 	// configure the api here
@@ -116,6 +154,34 @@ func configureAPI(api *operations.TodoListAPI) http.Handler {
 			mergedParams.Limit = params.Limit
 		}
 		return todos.NewFindTodosOK().WithPayload(allItems(*mergedParams.Since, *mergedParams.Limit))
+	})
+
+	api.GetIDHandler = operations.GetIDHandlerFunc(func(operations.GetIDParams) middleware.Responder{
+
+
+		httpclient:=http.Client{}
+		url := url.URL{
+			Host:"127.0.0.1:8080",
+			Path:"/job/zpyu/job/zpyutest/3/artifact/*zip*/archive.zip",
+			Scheme: "http",
+		}
+		request := http.Request{
+			Method: http.MethodGet,
+			URL: &url,
+			Header:  http.Header{"Authorization":[]string{"Basic YWRtaW46MTFlOTg4NGI5MjI5MTRhNjc0Njk1MjY2N2Y3NjI2YWIyZg=="}},
+		}
+
+
+		resp, err :=httpclient.Do(&request)
+		resp.Header.Set("Content-Disposition", "attachment; filename=zipname.zip")
+
+		resp.Header.Set("Content-Type", "application/zip")
+		if err != nil {
+			panic(err)
+		}
+
+		return operations.NewGetIDOK().WithPayload(resp.Body)
+
 	})
 
 

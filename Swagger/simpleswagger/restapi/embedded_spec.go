@@ -113,7 +113,16 @@ func init() {
           "200": {
             "description": "get file from jenkins",
             "schema": {
-              "type": "file"
+              "type": "string",
+              "format": "binary"
+            },
+            "headers": {
+              "Content-Disposition": {
+                "type": "string"
+              },
+              "Content-Type": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -315,7 +324,16 @@ func init() {
           "200": {
             "description": "get file from jenkins",
             "schema": {
-              "type": "file"
+              "type": "string",
+              "format": "binary"
+            },
+            "headers": {
+              "Content-Disposition": {
+                "type": "string"
+              },
+              "Content-Type": {
+                "type": "string"
+              }
             }
           },
           "default": {

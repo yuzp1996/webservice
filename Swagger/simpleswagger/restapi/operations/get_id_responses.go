@@ -22,6 +22,14 @@ const GetIDOKCode int = 200
 swagger:response getIdOK
 */
 type GetIDOK struct {
+	/*
+
+	 */
+	ContentDisposition string `json:"Content-Disposition"`
+	/*
+
+	 */
+	ContentType string `json:"Content-Type"`
 
 	/*
 	  In: Body
@@ -33,6 +41,28 @@ type GetIDOK struct {
 func NewGetIDOK() *GetIDOK {
 
 	return &GetIDOK{}
+}
+
+// WithContentDisposition adds the contentDisposition to the get Id o k response
+func (o *GetIDOK) WithContentDisposition(contentDisposition string) *GetIDOK {
+	o.ContentDisposition = contentDisposition
+	return o
+}
+
+// SetContentDisposition sets the contentDisposition to the get Id o k response
+func (o *GetIDOK) SetContentDisposition(contentDisposition string) {
+	o.ContentDisposition = contentDisposition
+}
+
+// WithContentType adds the contentType to the get Id o k response
+func (o *GetIDOK) WithContentType(contentType string) *GetIDOK {
+	o.ContentType = contentType
+	return o
+}
+
+// SetContentType sets the contentType to the get Id o k response
+func (o *GetIDOK) SetContentType(contentType string) {
+	o.ContentType = contentType
 }
 
 // WithPayload adds the payload to the get Id o k response
@@ -48,6 +78,20 @@ func (o *GetIDOK) SetPayload(payload io.ReadCloser) {
 
 // WriteResponse to the client
 func (o *GetIDOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header Content-Disposition
+
+	contentDisposition := o.ContentDisposition
+	if contentDisposition != "" {
+		rw.Header().Set("Content-Disposition", contentDisposition)
+	}
+
+	// response header Content-Type
+
+	contentType := o.ContentType
+	if contentType != "" {
+		rw.Header().Set("Content-Type", contentType)
+	}
 
 	rw.WriteHeader(200)
 	payload := o.Payload

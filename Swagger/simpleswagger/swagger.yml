@@ -99,7 +99,13 @@ paths:
         200:
           description: get file from jenkins
           schema:
-            type: file
+            type: string
+            format: binary
+          headers:
+            Content-Type:
+              type: string
+            Content-Disposition:
+              type: string
         default:
           description: generic error response
           schema:

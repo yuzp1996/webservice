@@ -27,8 +27,6 @@ func Run(){
 
 	flags.String("name","yuzhipeng","the name of author")
 	flags.String("port","3000","the name of author")
-
-
 	flags.String("basedomain", "alauda.io",
 		"Used to specify the default system namespace (formerly alauda-system).")
 
@@ -40,6 +38,7 @@ func Run(){
 
 	basedomain := viper.GetString("basedomain")
 	klog.Errorf("basedomain is %v", basedomain)
+
 
 
 	if err := rootCmd.Execute(); err != nil{

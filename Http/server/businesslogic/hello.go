@@ -2,20 +2,20 @@ package businesslogic
 
 import "fmt"
 
-type Hellointer interface {
+type Hellointerface interface {
 	Hello()
 }
 
-func NewCommendOptions()Hellointer{
+func NewCommendOptions()Hellointerface{
 	return CommendOption{
-		Options:[]Hellointer{
-			port{"logoption"},
-			optoner2{"pamaration"},
+		Options:[]Hellointerface{
+			option{"first option"},
+			optione1{"second option"},
 		}}
 }
 
 type CommendOption struct {
-	Options []Hellointer
+	Options []Hellointerface
 }
 
 func(co CommendOption)Hello(){
@@ -24,17 +24,17 @@ func(co CommendOption)Hello(){
 	}
 }
 
-type port struct {
+type option struct {
 	name string
 }
-func (O1 port)Hello(){
-	fmt.Println(O1.name)
+func (O option)Hello(){
+	fmt.Println(O.name)
 }
 
-type optoner2 struct {
+type optione1 struct {
 	name string
 }
 
-func (O2 optoner2)Hello(){
-	fmt.Println(O2.name)
+func (O optione1)Hello(){
+	fmt.Println(O.name)
 }

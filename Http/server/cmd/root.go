@@ -7,7 +7,6 @@ import (
 	"k8s.io/klog"
 	"os"
 	"webservice/Http/server/customhandler"
-
 )
 
 var rootCmd = &cobra.Command{
@@ -23,12 +22,12 @@ type ExtraConfig struct {
 	BaseDomain           string
 }
 
-func Execute(){
-
-	rootCmd.Flags().String("name","yuzhipeng","the name of author")
-	rootCmd.Flags().String("port","3000","the name of author")
-
+func Run(){
 	flags := rootCmd.Flags()
+
+	flags.String("name","yuzhipeng","the name of author")
+	flags.String("port","3000","the name of author")
+
 
 	flags.String("basedomain", "alauda.io",
 		"Used to specify the default system namespace (formerly alauda-system).")

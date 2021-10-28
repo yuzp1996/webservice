@@ -1,5 +1,6 @@
 sonar:
 	sonar-scanner
+        dd
 
 # Usage: make all log="k8s client test"
 all:sonar
